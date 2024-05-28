@@ -1,0 +1,16 @@
+.main-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .admin {
+        color: #FF0000;
+        font-weight: 500;
+    }
+    th {
+        font-weight: 700;
+        color: #6743c7;
+    }
+}

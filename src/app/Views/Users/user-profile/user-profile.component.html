@@ -1,0 +1,64 @@
+<div class="main-container" *ngIf="dataLoaded">
+    <mat-card *ngIf="isEdit == false">
+        <mat-card-content>
+          <div class="header">
+            <img src="../../../../assets/avatar.png" alt="User avatar">
+              <h3> User profile </h3>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-list role="list">
+              <mat-list-item role="listitem">
+                  <span class="list-title">Username:</span> {{ editForm.value.username }}
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                  <span class="list-title">Role:</span> <span [ngClass]="[editForm.value.role]"> {{ editForm.value.role }}</span>
+              </mat-list-item>
+                <mat-list-item role="listitem">
+                    <span class="list-title">Email:</span> {{ editForm.value.email }}
+                </mat-list-item>
+            </mat-list>
+            <div class="footer">
+              <button mat-flat-button color="primary" type="submit" (click)="editUser()">Edit</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="isEdit == true">
+        <mat-card-content>
+          <div class="header">
+            <img src="../../../../assets/avatar.png" alt="User avatar">
+              <h3> User profile </h3>
+            </div>
+            <mat-divider></mat-divider>
+            <form [formGroup]="editForm" (submit)="submit()">
+              <mat-form-field class="form-field" appearance="outline">
+                <mat-label> E-mail
+                </mat-label>
+                <input matInput formControlName="email" required>
+                <mat-error *ngIf="editForm.controls['email'].touched && editForm.controls['email'].invalid">
+                  <span *ngIf="editForm.controls['email'].errors!['required']">This field is mandatory.</span>
+                  <span *ngIf="editForm.controls['email'].errors!['pattern']">This field is invalid.</span>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field" appearance="outline">
+                <mat-label> Username
+                </mat-label>
+                <input matInput formControlName="username" type="username">
+                <mat-error *ngIf="editForm.controls['username'].touched && editForm.controls['username'].invalid">
+                  <span *ngIf="editForm.controls['username'].errors!['required']">This field is mandatory.</span>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field" appearance="outline">
+                <mat-label>User role</mat-label>
+                <mat-select formControlName="role">
+                  @for (role of roles; track role) {
+                    <mat-option [value]="role.value">{{role.viewValue}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <div class="footer">
+                <button mat-flat-button color="primary" type="submit">Edit</button>
+              </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
